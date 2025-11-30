@@ -201,135 +201,167 @@
         const Download = (p) => <Icon name="download" {...p} />;
 
         // --- DATOS COMPLETOS ---
-        const characters = [
-                { id: 'aoshin-sun', name: 'Ao Shin Heraldo del Sol', title: 'El Forjador Místico', desc: 'Eres un ser de luz y sabiduría ancestral. Como un forjador de estrellas, tienes una conexión profunda con el universo y lo místico. Tu presencia es cálida pero imponente.', traits: ['magic', 'light', 'powerful', 'aura', 'mystic'], color: 'text-amber-600', borderColor: 'border-amber-500', img: 'img/aoshin.jpg' },
-                { id: 'gwen-cafe', name: 'Chibi Prestige Cafe Gwen', title: 'La Líder Resiliente', desc: 'Eres una líder, pero de lo adorable. Guías a los demás con encanto y estética. Tu verdadera fuerza es tu resiliencia: siempre te arreglas el cabello y vuelves a brillar.', traits: ['aesthetic', 'leader', 'resilient', 'cute'], color: 'text-purple-600', borderColor: 'border-purple-400', img: 'img/gwencuties.jpg' },
-                { id: 'jinx-chibi', name: 'Chibi Jinx', title: 'El Caos Divertido', desc: 'Eres una explosión de energía y problemas. Vives al límite, rompiendo reglas y riéndote mientras lo haces, porque para ti, la vida es un juego frenético.', traits: ['chaotic', 'fun', 'gamer', 'intense'], color: 'text-fuchsia-600', borderColor: 'border-fuchsia-500', img: 'img/jinx.jpg' },
-                { id: 'ekko-chibi', name: 'Chibi Ekko', title: 'El Rebelde Idealista', desc: 'Te mueven las causas nobles. Eres ingenioso, un poco rebelde y bastante testarudo; cuando se te mete una idea en la cabeza, no hay línea temporal que te haga cambiar de opinión.', traits: ['justice', 'rebellious', 'smart', 'passionate'], color: 'text-teal-600', borderColor: 'border-teal-400', img: 'img/ekko.jpg' },
-                { id: 'lux-sg', name: 'Chibi Star Guardian Lux', title: 'La Esperanza Luminosa', desc: 'Tienes un corazón extremadamente sensible que siente el dolor de un mundo corrompido, pero eliges no rendirte. Tratas de ver la luz en todo.', traits: ['light', 'optimist', 'sensitive', 'magic'], color: 'text-pink-500', borderColor: 'border-pink-300', img: 'img/luxstar.jpg' },
-                { id: 'pengu-fencing', name: 'Pingu Caballero', title: 'El Romántico Ambicioso', desc: 'Un alma poderosa armada con un florete y grandes sueños. Eres un romántico empedernido que idealiza el amor y la gloria. Conquistas el mundo con estilo.', traits: ['romantic', 'ambitious', 'powerful', 'leader'], color: 'text-blue-600', borderColor: 'border-blue-600', img: 'img/pengu-fencing.jpg' },
-                { id: 'ravenlord', name: 'Ravenlord Featherknight', title: 'El Señor de la Justicia Oscura', desc: 'Eres el caballero de la noche. Buscas la justicia con métodos oscuros y calculadores. Eres un enigma para muchos, operando desde las sombras.', traits: ['dark', 'justice', 'mysterious', 'powerful'], color: 'text-violet-800', borderColor: 'border-violet-900', img: 'img/ravenlord.jpg' },
-                { id: 'ahri-sg', name: 'Ahri Star Guardian', title: 'La Guardiana Carismática', desc: 'Eres la luz que guía al equipo. Tienes un carisma magnético que atrae a todos, mezclando ternura con una fuerza interior inquebrantable.', traits: ['sexy', 'cute', 'leader', 'magic'], color: 'text-pink-600', borderColor: 'border-pink-400', img: 'img/ahri-sg.jpg' },
-                { id: 'katarina-ba', name: 'Battle Academia Katarina', title: 'La Guerrera de Élite', desc: 'Naciste para la excelencia. Tu ambición no tiene límites y ves la vida como una competencia. Directa, letal y siempre enfocada en tu siguiente objetivo.', traits: ['warrior', 'ambitious', 'smart', 'competitive'], color: 'text-red-600', borderColor: 'border-red-500', img: 'img/katarina-ba.jpg' },
-                { id: 'mf-bb', name: 'Chibi Battle Bunny MF', title: 'La Gamer Pro', desc: 'Gamer de corazón y estratega por diversión. Vives la vida como si fuera un lobby Challenger. Competitiva, digital y con un estilo explosivo.', traits: ['gamer', 'fun', 'strategic', 'sexy'], color: 'text-emerald-600', borderColor: 'border-emerald-400', img: 'img/mf-bb.jpg' },
-                { id: 'choncc-pink', name: 'Panchonc Rosado', title: 'El Glotón Relajado', desc: 'El alma de la fiesta (y del buffet). Tu filosofía es simple: barriga llena, corazón contento. Irradias buena vibra.', traits: ['glutton', 'chill', 'happy', 'social'], color: 'text-pink-500', borderColor: 'border-pink-300', img: 'img/choncc-pink.jpg' },
-                { id: 'molediver', name: 'Topobrero', title: 'El Trabajador Perspicaz', desc: 'El constructor silencioso. Mientras otros hablan, tú trabajas. Eres perspicaz, humilde y increíblemente eficiente.', traits: ['worker', 'smart', 'humble', 'reliable'], color: 'text-yellow-700', borderColor: 'border-yellow-600', img: 'img/molediver.jpg' },
-                { id: 'qiqi', name: 'Qiqi', title: 'La Artista Astuta', desc: 'Un espíritu libre con ritmo propio. Tienes una astucia afilada y un gusto impecable por las artes. No sigues tendencias, las creas.', traits: ['music', 'smart', 'artistic', 'unique'], color: 'text-indigo-600', borderColor: 'border-indigo-400', img: 'img/qiqi.jpg' },
-                { id: 'teemo-devil', name: 'Teemonio', title: 'El Estratega Rebelde', desc: 'El encantador caótico. Juguetón, estratega maestro y con un magnetismo peligroso. Te encanta sembrar un poco de caos para ver qué pasa.', traits: ['playful', 'strategic', 'flirty', 'chaotic'], color: 'text-red-700', borderColor: 'border-red-600', img: 'img/teemo-devil.jpg' },
-                { id: 'lux-dark', name: 'Chibi Dark Cosmic Lux', title: 'La Mística Oscura', desc: 'La profundidad del abismo te llama. Eres una persona intensa, a veces incomprendida, que encuentra belleza en la oscuridad y el misterio.', traits: ['dark', 'intense', 'powerful', 'magic'], color: 'text-purple-900', borderColor: 'border-purple-800', img: 'img/lux-dark.jpg' },
-                { id: 'mf-blood', name: 'Chibi Blood Moon MF', title: 'La Guerrera Apasionada', desc: 'Pasión y equilibrio. Eres una guerrera feroz que ama con intensidad y protege a los animales y a los suyos a muerte.', traits: ['warrior', 'passionate', 'animal-lover', 'adventure'], color: 'text-red-800', borderColor: 'border-red-700', img: 'img/mf-blood.jpg' },
-                { id: 'ahri-kda', name: 'K/DA Ahri Unbound', title: 'La Diva de Lujo', desc: 'La Diva Suprema. Te encantan los lujos y el brillo. Estás enamorada de la idea del amor, exigiendo siempre lo mejor de la vida.', traits: ['luxury', 'romantic', 'leader', 'aesthetic'], color: 'text-indigo-500', borderColor: 'border-indigo-300', img: 'img/ahri-kda.jpg' },
-                { id: 'darius-god', name: 'God King Darius', title: 'El Rey Conquistador', desc: 'Nacido para gobernar. Tienes un aura que impone respeto. Líder nato, apasionado y calculador.', traits: ['aura', 'leader', 'passionate', 'calculating'], color: 'text-yellow-600', borderColor: 'border-yellow-500', img: 'img/darius-god.jpg' },
-                { id: 'kapi', name: 'Kapi Manantial', title: 'El Guardián Zen', desc: 'Vives lento en un mundo rápido. Eres el refugio seguro para tus amigos, irradiando paz y naturaleza.', traits: ['chill', 'slow', 'caregiver', 'nature'], color: 'text-emerald-600', borderColor: 'border-emerald-400', img: 'img/kapi.jpg' },
-                { id: 'choncc-flower', name: 'Choncc Flor Fabulosa', title: 'La Señora del Chisme', desc: 'La reina del salseo. Disfrutas de la comodidad, un buen café y estar al tanto de todo. Energía de "tía divertida".', traits: ['gossip', 'coffee', 'chill', 'social'], color: 'text-pink-600', borderColor: 'border-pink-500', img: 'img/choncc-flower.jpg' },
-                { id: 'fenroar', name: 'Fenrugido', title: 'El Lobo Solitario', desc: 'Vives en estado de alerta, protegiendo tu territorio. Tu corazón busca incansablemente a esa compañera de vida con quien compartir tu lealtad eterna.', traits: ['loner', 'alert', 'romantic', 'loyal'], color: 'text-slate-600', borderColor: 'border-slate-400', img: 'img/fenroar.jpg' },
-                { id: 'knife-pup', name: 'Cuchibueso', title: 'El Romántico Resiliente', desc: 'Tienes muchísimo amor para dar. Aunque a veces te rompen el corazón, tu optimismo te hacen adorablemente persistente.', traits: ['attention', 'romantic', 'resilient', 'cute'], color: 'text-orange-600', borderColor: 'border-orange-400', img: 'img/knife-pup.jpg' },
-                { id: 'dowsie', name: 'Magagua Gominola', title: 'La Dulzura Tímida', desc: 'Dulzura pura. Eres tímida al principio, pero quien se gana tu confianza descubre un tesoro. Tu superpoder es tu ternura.', traits: ['shy', 'cute', 'adorable', 'friendly'], color: 'text-blue-500', borderColor: 'border-blue-300', img: 'img/dowsie.jpg' },
-                { id: 'duckbill', name: 'Ornitorrinco Meloso', title: 'El Hiperactivo Social', desc: 'Batería social inagotable. Te encanta la multitud y el contacto físico. Eres positividad en estado puro.', traits: ['crowd', 'positive', 'hyper', 'romantic'], color: 'text-yellow-500', borderColor: 'border-yellow-400', img: 'img/duckbill.jpg' },
-                { id: 'dango', name: 'Dango Gotalimón', title: 'El Optimista Estable', desc: 'Quieres comerte el mundo, pero disfrutas de los pequeños detalles. Tu meta es la estabilidad y la felicidad sencilla.', traits: ['optimist', 'ambitious', 'stable', 'friendly'], color: 'text-lime-600', borderColor: 'border-lime-400', img: 'img/dango.jpg' },
-                { id: 'burno', name: 'Burno', title: 'El Superviviente Práctico', desc: 'No te complicas la vida con dramas. Eres directo y autosuficiente. Aunque algunos te subestimen, tú siempre sales ganando.', traits: ['independent', 'simple', 'survivor', 'solo'], color: 'text-red-600', borderColor: 'border-red-500', img: 'img/burno.jpg' },
-                { id: 'ossia', name: 'Ossia', title: 'La Audaz', desc: 'Audacia sin límites. No conoces el miedo al fracaso. Eres atrevida y siempre terminas consiguiendo lo que quieres con estilo.', traits: ['bold', 'success', 'underestimated', 'brave'], color: 'text-cyan-600', borderColor: 'border-cyan-400', img: 'img/ossia.jpg' },
-                { id: 'pengu', name: 'Pengu', title: 'La Leyenda Viviente', desc: 'Eres el alma del juego. Puede que no parezcas intimidante, pero inspiras un respeto natural. Vives con pasión.', traits: ['iconic', 'gamer', 'respected', 'winner'], color: 'text-blue-700', borderColor: 'border-blue-500', img: 'img/pengu.jpg' }
+        
+        // --- BASE DE DATOS BALANCEADA (TODOS TIENEN OPORTUNIDAD) ---
+            const characters = [
+                // GRUPO 1: LOS AGRESIVOS / FUEGO (Reroll, Daño explosivo)
+                { id: 'annie-chibi', name: 'Chibi Annie', title: 'La Hija del Fuego', desc: '¡Lo quieres todo y lo quieres YA! Juegas agresivo, subes de nivel rápido y si alguien te gana... ¡Tibbers! No tienes paciencia para el late game.', traits: ['aggro', 'fire', 'scary', 'impulsive'], color: 'text-orange-600', borderColor: 'border-orange-500', img: 'img/chibiannie.jpg' },
+                { id: 'burno', name: 'Burno', title: 'El Tilteado', desc: 'Tu relación con el juego es amor-odio. Te enfadas cuando pierdes, gritas, pero siempre vuelves a jugar. Eres pura pasión y mecha corta.', traits: ['rage', 'fire', 'tilt', 'stubborn'], color: 'text-red-600', borderColor: 'border-red-500', img: 'img/burno.jpg' },
+                { id: 'katarina-ba', name: 'Katarina Academia', title: 'La Asesina Competitiva', desc: 'Solo te importa eliminar al carry rival. Eres directo/a, letal y odias perder el tiempo. Si la partida dura mucho, te aburres.', traits: ['assassin', 'sharp', 'fast', 'competitive'], color: 'text-red-700', borderColor: 'border-red-600', img: 'img/katarina-ba.jpg' },
+
+                // GRUPO 2: ECONOMÍA Y RIESGO (High Rollers)
+                { id: 'mf-bb', name: 'Chibi Miss Fortune', title: 'La Magnate', desc: 'El oro lo es todo. Juegas a racha de derrotas solo para sentir la adrenalina de cobrar el botín y remontar. Te gusta el lujo y el riesgo.', traits: ['money', 'risk', 'rich', 'bounty'], color: 'text-red-500', borderColor: 'border-red-400', img: 'img/mf-bb.jpg' },
+                { id: 'aoshin-sun', name: 'Ao Shin', title: 'El Dragón de Late Game', desc: 'Eres paciente. Sabes que tu momento llega al final. Mientras otros pelean por migajas, tú construyes un imperio invencible para el nivel 9.', traits: ['late', 'dragon', 'patience', 'powerful'], color: 'text-amber-600', borderColor: 'border-amber-500', img: 'img/aoshin.jpg' },
+                { id: 'teemo-devil', name: 'Teemonio', title: 'El Estratega Cruel', desc: 'Disfrutas el sufrimiento ajeno. Compras las fichas que otros quieren y usas emotes para desconcentrar. El juego psicológico es tu fuerte.', traits: ['troll', 'evil', 'mindgame', 'toxic'], color: 'text-red-800', borderColor: 'border-red-700', img: 'img/teemo-devil.jpg' },
+
+                // GRUPO 3: TÉCNICA Y SKILL (Los Tryhards)
+                { id: 'yasuo-chibi', name: 'Chibi Yasuo', title: 'El Duelista Mecánico', desc: 'Mueves tus unidades cada segundo. Buscas la perfección técnica. Si pierdes, no culpas a la suerte, culpas a tu ejecución. Tryhard puro.', traits: ['micro', 'skill', 'loner', 'sword'], color: 'text-sky-700', borderColor: 'border-sky-600', img: 'img/chibiyasuo.jpg' },
+                { id: 'ekko-chibi', name: 'Chibi Ekko', title: 'El Calculador', desc: 'Todo está en tu cabeza. Sabes las probabilidades exactas de cada tienda. Juegas con el tiempo y predices los movimientos del rival.', traits: ['smart', 'calc', 'tech', 'predict'], color: 'text-teal-600', borderColor: 'border-teal-400', img: 'img/ekko.jpg' },
+                { id: 'ravenlord', name: 'Ravenlord', title: 'El Metagamer Oscuro', desc: 'Estudias el parche antes de jugar. Abusas de lo que está roto (OP) sin remordimientos. La victoria justifica los medios.', traits: ['meta', 'dark', 'win', 'ruthless'], color: 'text-violet-800', borderColor: 'border-violet-700', img: 'img/ravenlord.jpg' },
+
+                // GRUPO 4: FLEXIBILIDAD Y ADAPTACIÓN
+                { id: 'kaisa-chibi', name: 'Chibi Kai\'Sa', title: 'La Superviviente', desc: 'Nunca te rindes. Sabes pivotar tu composición en segundos si el juego te da limones. Tu instinto de supervivencia es legendario.', traits: ['flex', 'survivor', 'adapt', 'instinct'], color: 'text-fuchsia-700', borderColor: 'border-fuchsia-600', img: 'img/chibikaisa.jpg' },
+                { id: 'pengu', name: 'Pengu', title: 'El Clásico', desc: 'El equilibrio perfecto. Eres el jugador estándar: juegas bien, eres respetuoso y disfrutas de lo básico bien hecho. Eres la cara del juego.', traits: ['classic', 'balanced', 'hero', 'respect'], color: 'text-blue-600', borderColor: 'border-blue-500', img: 'img/pengu.jpg' },
+                { id: 'ezreal-chibi', name: 'Chibi Ezreal', title: 'El Explorador', desc: 'Te encantan los objetos. Tu inventario siempre está lleno de artefactos brillantes. Priorizas equipar bien a tus unidades sobre todo lo demás.', traits: ['items', 'explorer', 'showoff', 'adventure'], color: 'text-amber-500', borderColor: 'border-amber-400', img: 'img/chibiezreal.jpg' },
+
+                // GRUPO 5: VIBRA ESTÉTICA / MAGIA (Los que antes no salían)
+                { id: 'lux-sg', name: 'Lux Star Guardian', title: 'La Optimista', desc: 'Crees en el poder de la amistad y en los tableros bonitos. Juegas verticales (ej. 9 Demacia) porque se ven geniales juntas.', traits: ['light', 'optimist', 'rainbow', 'vertical'], color: 'text-pink-500', borderColor: 'border-pink-300', img: 'img/luxstar.jpg' },
+                { id: 'ahri-sg', name: 'Ahri Star Guardian', title: 'La Diva Pop', desc: 'Eres el centro de atención. Te gusta que tu tablero brille y tus campeones tengan las mejores skins. Estilo sobre sustancia.', traits: ['star', 'diva', 'charm', 'visuals'], color: 'text-pink-600', borderColor: 'border-pink-400', img: 'img/ahri-sg.jpg' },
+                { id: 'qiqi', name: 'Qiqi', title: 'La Artista', desc: 'Te inventas composiciones que nadie más juega porque eres un alma creativa. Te aburre copiar a los demás, prefieres innovar.', traits: ['art', 'create', 'unique', 'paint'], color: 'text-indigo-500', borderColor: 'border-indigo-400', img: 'img/qiqi.jpg' },
+                { id: 'gwen-cafe', name: 'Gwen Café', title: 'La Detallista', desc: 'Te fijas en los pequeños detalles. Te gusta tener todo ordenado en tu banquillo. Eres dulce pero cortante si te molestan.', traits: ['cute', 'neat', 'sweet', 'scissor'], color: 'text-purple-600', borderColor: 'border-purple-400', img: 'img/gwencuties.jpg' },
+
+                // GRUPO 6: CHILL / TROLL / VIBES (Los olvidados)
+                { id: 'kapi', name: 'Kapi', title: 'El Chill Vibes', desc: 'Tú no te estresas. Pones música lofi, fuerzas la misma composición de siempre y disfrutas. Si pierdes, al menos estabas cómodo.', traits: ['chill', 'vibes', 'music', 'nature'], color: 'text-emerald-500', borderColor: 'border-emerald-400', img: 'img/kapi.jpg' },
+                { id: 'molediver', name: 'Topobrero', title: 'El Trabajador Humilde', desc: 'Nadie te nota, pero siempre quedas Top 4. Trabajas en silencio, acumulas recursos poco a poco y eres constante. Un obrero del TFT.', traits: ['work', 'humble', 'dirt', 'steady'], color: 'text-yellow-700', borderColor: 'border-yellow-600', img: 'img/molediver.jpg' },
+                { id: 'duckbill', name: 'Ornitorrinco', title: 'El Caos Ruidoso', desc: '¡Botón D! ¡Botón D! Te encanta el Reroll compulsivo. Haces mucho ruido, spameas el chat y juegas fichas de coste 1 al nivel 3.', traits: ['noise', 'spam', 'reroll', 'hyper'], color: 'text-yellow-500', borderColor: 'border-yellow-400', img: 'img/duckbill.jpg' },
+                { id: 'dango', name: 'Dango', title: 'La Mascota Feliz', desc: 'Ruedas por el tablero sin saber muy bien qué pasa, pero eres feliz. Tu inocencia (y suerte) te protege de los tryhards.', traits: ['happy', 'cute', 'luck', 'roll'], color: 'text-lime-500', borderColor: 'border-lime-400', img: 'img/dango.jpg' },
+                { id: 'fenroar', name: 'Fenrugido', title: 'El Guardián Leal', desc: 'Juegas composiciones defensivas. Te gusta proteger a tus unidades y jugar tanques inmortales que aguanten todo el tiempo extra.', traits: ['guard', 'tank', 'loyal', 'wild'], color: 'text-slate-600', borderColor: 'border-slate-400', img: 'img/fenroar.jpg' },
+                { id: 'ossia', name: 'Ossia', title: 'La Reina del Ritmo', desc: 'Juegas con flow. Sabes cuándo subir de nivel y cuándo gastar, todo tiene un ritmo musical para ti. Si la música es buena, la partida es buena.', traits: ['rhythm', 'cool', 'dance', 'tempo'], color: 'text-cyan-600', borderColor: 'border-cyan-400', img: 'img/ossia.jpg' }
             ];
 
-
-        const questions = [
-            {
-                text: "Es viernes por la noche, ¿cuál es tu plan ideal?",
-                options: [
-                    { text: "Salir de fiesta y ser el centro de atención.", points: ['sexy', 'social', 'iconic', 'party', 'chaotic'] },
-                    { text: "Quedarme en casa rankeando/tryhardeando.", points: ['gamer', 'competitive', 'loner', 'strategic', 'intense'] },
-                    { text: "Una cena lujosa o un evento exclusivo.", points: ['luxury', 'aesthetic', 'fancy', 'leader'] },
-                    { text: "Pedir mucha comida y ver series en pijama.", points: ['glutton', 'chill', 'coffee', 'simple', 'adorable'] },
-                    { text: "Planear algo espontáneo y un poco peligroso.", points: ['chaotic', 'fun', 'rebellious', 'adventure'] },
-                ]
-            },
-            {
-                text: "En un grupo de amigos, tú eres...",
-                options: [
-                    { text: "El líder que toma las decisiones difíciles.", points: ['leader', 'aura', 'bold', 'resilient', 'powerful'] },
-                    { text: "El que hace reír a todos (a veces liándola).", points: ['happy', 'friendly', 'glutton', 'chaotic', 'fun'] },
-                    { text: "El que cuida que nadie salga herido.", points: ['caregiver', 'reliable', 'light', 'sensitive', 'justice'] },
-                    { text: "El que siempre desaparece o va a su bola.", points: ['independent', 'loner', 'dark', 'mysterious', 'rebellious'] },
-                ]
-            },
-            {
-                text: "¿Cuál es tu mayor defecto?",
-                options: [
-                    { text: "Soy demasiado perfeccionista, colapso si algo falla.", points: ['perfectionist', 'aesthetic', 'ambitious', 'resilient'] },
-                    { text: "Me enamoro demasiado rápido y sufro.", points: ['romantic', 'attention', 'passionate', 'sensitive'] },
-                    { text: "Soy muy testarudo/a, es mi idea o nada.", points: ['stubborn', 'rebellious', 'powerful', 'leader'] },
-                    { text: "Soy un poco manipulador/a para conseguir lo que quiero.", points: ['strategic', 'chaotic', 'calculating', 'smart'] },
-                ]
-            },
-            {
-                text: "Te encuentras una cartera con dinero, ¿qué haces?",
-                options: [
-                    { text: "Busco al dueño, es lo correcto.", points: ['stable', 'justice', 'light', 'noble', 'heroic'] },
-                    { text: "Me compro algo bonito para lucirlo.", points: ['aesthetic', 'luxury', 'cute', 'fancy'] },
-                    { text: "Invito a mis amigos a comer hasta reventar.", points: ['social', 'friendly', 'glutton', 'happy'] },
-                    { text: "Me compro Skins o RP inmediatamente.", points: ['gamer', 'fun', 'chaotic', 'intense'] },
-                ]
-            },
-            {
-                text: "¿Qué cualidad valoras más en ti mismo?",
-                options: [
-                    { text: "Mi inteligencia y rebeldía.", points: ['smart', 'strategic', 'brain', 'rebellious'] },
-                    { text: "Mi capacidad de luchar por causas justas.", points: ['loyal', 'warrior', 'caregiver', 'justice', 'light'] },
-                    { text: "Mi estilo único y mi resiliencia.", points: ['aesthetic', 'unique', 'resilient', 'bold'] },
-                    { text: "Mi ambición de ser el mejor.", points: ['worker', 'ambitious', 'competitive', 'powerful', 'aura'] },
-                ]
-            },
-            {
-                text: "Tu interés romántico no te hace caso...",
-                options: [
-                    { text: "Insisto caballerosamente hasta conquistarle.", points: ['resilient', 'attention', 'romantic', 'hyper', 'ambitious'] },
-                    { text: "Paso página, yo valgo mucho más.", points: ['leader', 'independent', 'bold', 'luxury'] },
-                    { text: "Me pongo sensible y trato de mejorar el mundo.", points: ['music', 'artistic', 'shy', 'light', 'sensitive'] },
-                    { text: "Hago una locura para llamar su atención.", points: ['strategic', 'chaotic', 'fun', 'rebellious'] },
-                ]
-            },
-            {
-                text: "Elige un ambiente:",
-                options: [
-                    { text: "Sombras, misterio, justicia nocturna.", points: ['dark', 'intense', 'justice', 'mysterious'] },
-                    { text: "Kawaii, cafetería, brillo pastel.", points: ['cute', 'aesthetic', 'happy', 'light'] },
-                    { text: "Tecnología, neón, futuro.", points: ['smart', 'gamer', 'rebellious', 'intense'] },
-                    { text: "Castillos, duelo de honor, realeza.", points: ['noble', 'powerful', 'ambitious', 'leader', 'aura'] },
-                    { text: "Cosmos, estrellas, templos antiguos.", points: ['mystic', 'magic', 'light', 'aura', 'star'] },
-                ]
-            },
-            {
-                text: "Cuando algo sale mal y fracasas, tú...",
-                options: [
-                    { text: "Analizo el error fríamente para no repetirlo.", points: ['smart', 'strategic', 'calculating', 'stable'] },
-                    { text: "Me enfado, rompo algo, pero vuelvo más fuerte.", points: ['intense', 'chaotic', 'warrior', 'fun'] },
-                    { text: "Busco consuelo en mis amigos o en comida rica.", points: ['social', 'glutton', 'sensitive', 'friendly'] },
-                    { text: "Me arreglo el cabello, sonrío y sigo adelante.", points: ['resilient', 'aesthetic', 'proud', 'leader'] },
-                ]
-            },
-            {
-                text: "Si pudieras tener un superpoder, ¿cuál elegirías?",
-                options: [
-                    { text: "Controlar el tiempo para arreglar injusticias.", points: ['justice', 'caregiver', 'sensitive', 'magic'] },
-                    { text: "Poder absoluto para aplastar a mis enemigos.", points: ['powerful', 'ambitious', 'competitive', 'dark', 'aura'] },
-                    { text: "Ser invisible para gastar bromas o huir.", points: ['playful', 'chaotic', 'shy', 'mysterious'] },
-                    { text: "Tener un encanto irresistible.", points: ['sexy', 'romantic', 'iconic', 'attention'] },
-                    { text: "Crear estrellas y moldear la realidad.", points: ['mystic', 'magic', 'light', 'star'] },
-                ]
-            },
-            {
-                text: "Tu filosofía de vida se resume en:",
-                options: [
-                    { text: "Trabaja duro en silencio, deja que el éxito haga ruido.", points: ['worker', 'humble', 'loner', 'survivor'] },
-                    { text: "La vida es corta, cómetela a bocados.", points: ['happy', 'party', 'fun', 'optimist'] },
-                    { text: "El estilo y la clase son lo primero.", points: ['aesthetic', 'luxury', 'fancy', 'unique'] },
-                    { text: "Ganar no es lo importante, es lo único.", points: ['winner', 'respected', 'bold', 'leader'] },
-                    { text: "Todo está conectado por un destino místico.", points: ['mystic', 'magic', 'aura', 'star'] },
-                ]
-            }
-        ];
-
+            // --- PREGUNTAS DIRIGIDAS (Cada opción apunta a grupos específicos) ---
+            const questions = [
+                {
+                    text: "¿Cuál es tu filosofía al empezar la partida?",
+                    options: [
+                        { text: "Agresividad pura. Quiero ver sangre en la etapa 2-1.", points: ['aggro', 'fire', 'annie-chibi', 'burno'] },
+                        { text: "Paciencia. Voy a perder vida para tener mejor economía.", points: ['money', 'risk', 'mf-bb', 'aoshin-sun'] },
+                        { text: "Adaptabilidad. Compro lo que me sale y veo qué pasa.", points: ['flex', 'survivor', 'kaisa-chibi', 'pengu'] },
+                        { text: "Estética. Compro las fichas que se ven bonitas juntas.", points: ['star', 'visuals', 'ahri-sg', 'lux-sg'] },
+                        { text: "Relajación. Pongo música y juego lo de siempre.", points: ['chill', 'vibes', 'kapi', 'dango'] }
+                    ]
+                },
+                {
+                    text: "Pierdes una ronda por MUY poco. Tu reacción:",
+                    options: [
+                        { text: "Analizo el posicionamiento para no fallar la próxima.", points: ['micro', 'skill', 'yasuo-chibi', 'ravenlord'] },
+                        { text: "Me enfado y golpeo la mesa (o el teclado).", points: ['rage', 'tilt', 'burno', 'annie-chibi'] },
+                        { text: "Me da igual, mi composición escala mejor a largo plazo.", points: ['late', 'patience', 'aoshin-sun', 'molediver'] },
+                        { text: "Spameo un emote triste o lloro en el chat.", points: ['cute', 'spam', 'dango', 'duckbill'] },
+                        { text: "Busco qué objeto me faltó para equiparlo luego.", points: ['items', 'calc', 'ezreal-chibi', 'ekko-chibi'] }
+                    ]
+                },
+                {
+                    text: "¿Qué tipo de composiciones prefieres?",
+                    options: [
+                        { text: "Las 'Verticales' (Ej: 9 Jonia). Me gusta completar la lista.", points: ['vertical', 'classic', 'lux-sg', 'pengu'] },
+                        { text: "Reroll de coste 1. Quiero fichas doradas al inicio.", points: ['reroll', 'hyper', 'duckbill', 'annie-chibi'] },
+                        { text: "Composiciones creativas que inventé yo mismo.", points: ['art', 'create', 'qiqi', 'offmeta'] },
+                        { text: "Tanques inmortales que aguanten infinito.", points: ['tank', 'guard', 'fenroar', 'molediver'] },
+                        { text: "Full Legendarias de coste 5 (Bill Gates).", points: ['rich', 'powerful', 'mf-bb', 'aoshin-sun'] }
+                    ]
+                },
+                {
+                    text: "Un rival te roba tu campeón en el carrusel...",
+                    options: [
+                        { text: "Lo anoto en mi lista negra. Se va a enterar.", points: ['evil', 'toxic', 'teemo-devil', 'katarina-ba'] },
+                        { text: "Busco rápidamente una alternativa, no me congelo.", points: ['adapt', 'instinct', 'kaisa-chibi', 'ekko-chibi'] },
+                        { text: "Grito a la pantalla. ¡ERA MÍO!", points: ['impulsive', 'noise', 'duckbill', 'burno'] },
+                        { text: "Suspiro y sigo escuchando mi playlist.", points: ['chill', 'music', 'kapi', 'ossia'] },
+                        { text: "Miro si hay algo más brillante o bonito que sobró.", points: ['visuals', 'optimist', 'ahri-sg', 'gwen-cafe'] }
+                    ]
+                },
+                {
+                    text: "¿Qué es lo que más valoras en tu tablero?",
+                    options: [
+                        { text: "Que mis campeones tengan los objetos perfectos.", points: ['items', 'tech', 'ezreal-chibi', 'ekko-chibi'] },
+                        { text: "Que sea visualmente armónico y combine colores.", points: ['art', 'rainbow', 'qiqi', 'lux-sg'] },
+                        { text: "Que sea matemáticamente eficiente y meta.", points: ['meta', 'calc', 'ravenlord', 'yasuo-chibi'] },
+                        { text: "Que tenga una frontline (tanques) impenetrable.", points: ['tank', 'guard', 'fenroar', 'molediver'] },
+                        { text: "Que haga mucho daño explosivo muy rápido.", points: ['assassin', 'sharp', 'katarina-ba', 'annie-chibi'] }
+                    ]
+                },
+                {
+                    text: "Estás en racha de derrotas. ¿El plan?",
+                    options: [
+                        { text: "Seguir perdiendo a propósito para cobrar el botín.", points: ['money', 'risk', 'mf-bb', 'teemo-devil'] },
+                        { text: "Rodar todo mi oro hasta 0 para estabilizarme.", points: ['impulsive', 'aggro', 'burno', 'annie-chibi'] },
+                        { text: "Mantener la calma, trabajar duro y remontar poco a poco.", points: ['work', 'steady', 'molediver', 'pengu'] },
+                        { text: "Inventar un giro drástico de guion. ¡Pivot!", points: ['create', 'unique', 'qiqi', 'kaisa-chibi'] },
+                        { text: "Confiar en la suerte y en el 'Corazón de las Cartas'.", points: ['luck', 'magic', 'dango', 'ahri-sg'] }
+                    ]
+                },
+                {
+                    text: "Elige un Aumento (Augment) ideal:",
+                    options: [
+                        { text: "'Forja Portátil'. ¡Dame artefactos únicos!", points: ['items', 'explorer', 'ezreal-chibi', 'qiqi'] },
+                        { text: "'Hedge Fund' o 'Rich Get Richer'. ¡DINERO!", points: ['rich', 'money', 'mf-bb', 'aoshin-sun'] },
+                        { text: "'Sector Comercial'. ¡Reroll gratis cada turno!", points: ['reroll', 'spam', 'duckbill', 'dango'] },
+                        { text: "'Loto Adornado'. ¡Críticos y brillo por todas partes!", points: ['star', 'visuals', 'ahri-sg', 'lux-sg'] },
+                        { text: "'Cibernético' o Stats puros. Eficiencia de combate.", points: ['micro', 'skill', 'yasuo-chibi', 'ravenlord'] }
+                    ]
+                },
+                {
+                    text: "¿Qué haces mientras juegas?",
+                    options: [
+                        { text: "Escucho música o podcasts, relax total.", points: ['music', 'vibes', 'kapi', 'ossia'] },
+                        { text: "Miro las estadísticas de otras webs (MetaTFT/Tactics).", points: ['meta', 'tech', 'ravenlord', 'ekko-chibi'] },
+                        { text: "Como snacks (y a veces ensucio el teclado).", points: ['happy', 'cute', 'dango', 'choncc-pink'] },
+                        { text: "Hablo solo o narro mi propia partida épicamente.", points: ['hero', 'showoff', 'pengu', 'ezreal-chibi'] },
+                        { text: "Miro intensamente la pantalla, ni parpadeo.", points: ['competitive', 'focus', 'katarina-ba', 'yasuo-chibi'] }
+                    ]
+                },
+                {
+                    text: "Llegas al Top 4. ¿Estás satisfecho?",
+                    options: [
+                        { text: "No. Si no es Top 1, es una derrota.", points: ['competitive', 'win', 'katarina-ba', 'ravenlord'] },
+                        { text: "Sí, Top 4 es puntos gratis. Trabajo honesto.", points: ['humble', 'work', 'molediver', 'pengu'] },
+                        { text: "Depende de si mi comp quedó bonita al final.", points: ['art', 'neat', 'qiqi', 'gwen-cafe'] },
+                        { text: "Me da igual, solo quiero ver si mi dragón mató a todos.", points: ['dragon', 'powerful', 'aoshin-sun', 'annie-chibi'] },
+                        { text: "¡SÍ! ¡He sobrevivido! ¡Celebración!", points: ['happy', 'party', 'duckbill', 'dango'] }
+                    ]
+                },
+                {
+                    text: "¿Cuál es tu animal espiritual en el juego?",
+                    options: [
+                        { text: "Un lobo o león guardián.", points: ['guard', 'wild', 'fenroar', 'yasuo-chibi'] },
+                        { text: "Un topo o tejón trabajador.", points: ['work', 'dirt', 'molediver', 'kapi'] },
+                        { text: "Un zorro o gato elegante.", points: ['star', 'cute', 'ahri-sg', 'gwen-cafe'] },
+                        { text: "Un dragón o bestia mítica.", points: ['dragon', 'fire', 'aoshin-sun', 'annie-chibi'] },
+                        { text: "Un pequeño demonio molesto.", points: ['evil', 'troll', 'teemo-devil', 'duckbill'] }
+                    ]
+                },
+                {
+                    text: "Estilo de baile/música favorito para tu minileyenda:",
+                    options: [
+                        { text: "K-Pop o Pop brillante y coreografiado.", points: ['dance', 'diva', 'ahri-sg', 'ossia'] },
+                        { text: "Lofi Hip Hop o Jazz suave.", points: ['chill', 'rhythm', 'kapi', 'qiqi'] },
+                        { text: "Rock pesado o Metal para la batalla.", points: ['rage', 'fire', 'burno', 'katarina-ba'] },
+                        { text: "Música épica orquestal de jefe final.", points: ['late', 'boss', 'aoshin-sun', 'ravenlord'] },
+                        { text: "Sonidos random y ruidos divertidos.", points: ['noise', 'spam', 'duckbill', 'dango'] }
+                    ]
+                },
+                {
+                    text: "Última: ¿Por qué deberías ganar este lobby?",
+                    options: [
+                        { text: "Porque he sido el más inteligente y calculador.", points: ['smart', 'calc', 'ekko-chibi', 'ravenlord'] },
+                        { text: "Porque tengo el mejor estilo y estética.", points: ['star', 'visuals', 'ahri-sg', 'lux-sg'] },
+                        { text: "Porque he trabajado duro desde abajo.", points: ['humble', 'survivor', 'molediver', 'kaisa-chibi'] },
+                        { text: "Porque simplemente soy el protagonista.", points: ['hero', 'showoff', 'pengu', 'ezreal-chibi'] },
+                        { text: "Porque voy a quemarlos a todos, jaja.", points: ['evil', 'fire', 'teemo-devil', 'annie-chibi'] }
+                    ]
+                }
+            ];
         const App = () => {
             const [started, setStarted] = useState(false);
             const [currentQuestion, setCurrentQuestion] = useState(0);
