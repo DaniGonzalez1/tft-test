@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TFT Archetype Quiz </title>
+
+    <!-- 1. Cargar React y ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+    <!-- 2. Cargar Babel (para traducir JSX) -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- 3. Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- 4. Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- 5. html2canvas (Para la captura) -->
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap');
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #F9FAFB;
+            color: #333333;
+            overflow-x: hidden;
+        }
+
+        /* Texturas y Fondos */
+        .bg-noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        .aura-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.5;
+            z-index: -1;
+            animation: float 14s infinite ease-in-out;
+        }
+
+        .aura-purple {
+            background: #C084FC;
+            width: 600px;
+            height: 600px;
+            top: -10%;
+            right: -10%;
+        }
+
+        .aura-pink {
+            background: #F472B6;
+            width: 400px;
+            height: 400px;
+            bottom: 5%;
+            left: -5%;
+            animation-delay: 2s;
+        }
+
+        .aura-lime {
+            background: #BEF264;
+            width: 300px;
+            height: 300px;
+            top: 40%;
+            right: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            50% {
+                transform: translate(20px, -30px) scale(1.05);
+            }
+        }
+
+        /* Tipografía */
+        h1,
+        h2,
+        h3 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* UI Elements */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 10px 40px rgba(167, 139, 250, 0.1);
+            border-radius: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-pill {
+            background: #8B5CF6;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 14px 32px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+        }
+
+        .btn-pill:hover {
+            background: #7C3AED;
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 10px 25px rgba(139, 92, 246, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #8B5CF6;
+            border: 2px solid #E9D5FF;
+            border-radius: 50px;
+            padding: 12px 28px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-outline:hover {
+            background: #F3E8FF;
+            border-color: #C084FC;
+        }
+
+        .btn-option {
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.0);
+            border-radius: 1rem;
+            padding: 1.25rem;
+            text-align: left;
+            transition: all 0.2s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+        }
+
+        .btn-option:hover {
+            background: white;
+            border-color: #A78BFA;
+            transform: translateX(6px);
+            box-shadow: 0 4px 12px rgba(167, 139, 250, 0.2);
+        }
+
+        .progress-track {
+            background: #E9D5FF;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #A78BFA, #F472B6);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // --- ICONOS (Mapeo manual para HTML) ---
+        const Icon = ({ name, size = 24, className = "" }) => <i data-lucide={name} style={{ width: size, height: size }} className={className}></i>;
+        const Sparkles = (p) => <Icon name="sparkles" {...p} />;
+        const Crown = (p) => <Icon name="crown" {...p} />;
+        const Star = (p) => <Icon name="star" {...p} />;
+        const Zap = (p) => <Icon name="zap" {...p} />;
+        const ArrowRight = (p) => <Icon name="arrow-right" {...p} />;
+        const RefreshCcw = (p) => <Icon name="refresh-ccw" {...p} />;
+        const Share2 = (p) => <Icon name="share-2" {...p} />;
+        const Download = (p) => <Icon name="download" {...p} />;
+
+        // --- DATOS COMPLETOS ---
+        const characters = [
+                { id: 'aoshin-sun', name: 'Ao Shin Heraldo del Sol', title: 'El Forjador Místico', desc: 'Eres un ser de luz y sabiduría ancestral. Como un forjador de estrellas, tienes una conexión profunda con el universo y lo místico. Tu presencia es cálida pero imponente.', traits: ['magic', 'light', 'powerful', 'aura', 'mystic'], color: 'text-amber-600', borderColor: 'border-amber-500', img: 'img/aoshin.jpg' },
+                { id: 'gwen-cafe', name: 'Chibi Prestige Cafe Gwen', title: 'La Líder Resiliente', desc: 'Eres una líder, pero de lo adorable. Guías a los demás con encanto y estética. Tu verdadera fuerza es tu resiliencia: siempre te arreglas el cabello y vuelves a brillar.', traits: ['aesthetic', 'leader', 'resilient', 'cute'], color: 'text-purple-600', borderColor: 'border-purple-400', img: 'img/gwencuties.jpg' },
+                { id: 'jinx-chibi', name: 'Chibi Jinx', title: 'El Caos Divertido', desc: 'Eres una explosión de energía y problemas. Vives al límite, rompiendo reglas y riéndote mientras lo haces, porque para ti, la vida es un juego frenético.', traits: ['chaotic', 'fun', 'gamer', 'intense'], color: 'text-fuchsia-600', borderColor: 'border-fuchsia-500', img: 'img/jinx.jpg' },
+                { id: 'ekko-chibi', name: 'Chibi Ekko', title: 'El Rebelde Idealista', desc: 'Te mueven las causas nobles. Eres ingenioso, un poco rebelde y bastante testarudo; cuando se te mete una idea en la cabeza, no hay línea temporal que te haga cambiar de opinión.', traits: ['justice', 'rebellious', 'smart', 'passionate'], color: 'text-teal-600', borderColor: 'border-teal-400', img: 'img/ekko.jpg' },
+                { id: 'lux-sg', name: 'Chibi Star Guardian Lux', title: 'La Esperanza Luminosa', desc: 'Tienes un corazón extremadamente sensible que siente el dolor de un mundo corrompido, pero eliges no rendirte. Tratas de ver la luz en todo.', traits: ['light', 'optimist', 'sensitive', 'magic'], color: 'text-pink-500', borderColor: 'border-pink-300', img: 'img/luxstar.jpg' },
+                { id: 'pengu-fencing', name: 'Pingu Caballero', title: 'El Romántico Ambicioso', desc: 'Un alma poderosa armada con un florete y grandes sueños. Eres un romántico empedernido que idealiza el amor y la gloria. Conquistas el mundo con estilo.', traits: ['romantic', 'ambitious', 'powerful', 'leader'], color: 'text-blue-600', borderColor: 'border-blue-600', img: 'img/pengu-fencing.jpg' },
+                { id: 'ravenlord', name: 'Ravenlord Featherknight', title: 'El Señor de la Justicia Oscura', desc: 'Eres el caballero de la noche. Buscas la justicia con métodos oscuros y calculadores. Eres un enigma para muchos, operando desde las sombras.', traits: ['dark', 'justice', 'mysterious', 'powerful'], color: 'text-violet-800', borderColor: 'border-violet-900', img: 'img/ravenlord.jpg' },
+                { id: 'ahri-sg', name: 'Ahri Star Guardian', title: 'La Guardiana Carismática', desc: 'Eres la luz que guía al equipo. Tienes un carisma magnético que atrae a todos, mezclando ternura con una fuerza interior inquebrantable.', traits: ['sexy', 'cute', 'leader', 'magic'], color: 'text-pink-600', borderColor: 'border-pink-400', img: 'img/ahri-sg.jpg' },
+                { id: 'katarina-ba', name: 'Battle Academia Katarina', title: 'La Guerrera de Élite', desc: 'Naciste para la excelencia. Tu ambición no tiene límites y ves la vida como una competencia. Directa, letal y siempre enfocada en tu siguiente objetivo.', traits: ['warrior', 'ambitious', 'smart', 'competitive'], color: 'text-red-600', borderColor: 'border-red-500', img: 'img/katarina-ba.jpg' },
+                { id: 'mf-bb', name: 'Chibi Battle Bunny MF', title: 'La Gamer Pro', desc: 'Gamer de corazón y estratega por diversión. Vives la vida como si fuera un lobby Challenger. Competitiva, digital y con un estilo explosivo.', traits: ['gamer', 'fun', 'strategic', 'sexy'], color: 'text-emerald-600', borderColor: 'border-emerald-400', img: 'img/mf-bb.jpg' },
+                { id: 'choncc-pink', name: 'Panchonc Rosado', title: 'El Glotón Relajado', desc: 'El alma de la fiesta (y del buffet). Tu filosofía es simple: barriga llena, corazón contento. Irradias buena vibra.', traits: ['glutton', 'chill', 'happy', 'social'], color: 'text-pink-500', borderColor: 'border-pink-300', img: 'img/choncc-pink.jpg' },
+                { id: 'molediver', name: 'Topobrero', title: 'El Trabajador Perspicaz', desc: 'El constructor silencioso. Mientras otros hablan, tú trabajas. Eres perspicaz, humilde y increíblemente eficiente.', traits: ['worker', 'smart', 'humble', 'reliable'], color: 'text-yellow-700', borderColor: 'border-yellow-600', img: 'img/molediver.jpg' },
+                { id: 'qiqi', name: 'Qiqi', title: 'La Artista Astuta', desc: 'Un espíritu libre con ritmo propio. Tienes una astucia afilada y un gusto impecable por las artes. No sigues tendencias, las creas.', traits: ['music', 'smart', 'artistic', 'unique'], color: 'text-indigo-600', borderColor: 'border-indigo-400', img: 'img/qiqi.jpg' },
+                { id: 'teemo-devil', name: 'Teemonio', title: 'El Estratega Rebelde', desc: 'El encantador caótico. Juguetón, estratega maestro y con un magnetismo peligroso. Te encanta sembrar un poco de caos para ver qué pasa.', traits: ['playful', 'strategic', 'flirty', 'chaotic'], color: 'text-red-700', borderColor: 'border-red-600', img: 'img/teemo-devil.jpg' },
+                { id: 'lux-dark', name: 'Chibi Dark Cosmic Lux', title: 'La Mística Oscura', desc: 'La profundidad del abismo te llama. Eres una persona intensa, a veces incomprendida, que encuentra belleza en la oscuridad y el misterio.', traits: ['dark', 'intense', 'powerful', 'magic'], color: 'text-purple-900', borderColor: 'border-purple-800', img: 'img/lux-dark.jpg' },
+                { id: 'mf-blood', name: 'Chibi Blood Moon MF', title: 'La Guerrera Apasionada', desc: 'Pasión y equilibrio. Eres una guerrera feroz que ama con intensidad y protege a los animales y a los suyos a muerte.', traits: ['warrior', 'passionate', 'animal-lover', 'adventure'], color: 'text-red-800', borderColor: 'border-red-700', img: 'img/mf-blood.jpg' },
+                { id: 'ahri-kda', name: 'K/DA Ahri Unbound', title: 'La Diva de Lujo', desc: 'La Diva Suprema. Te encantan los lujos y el brillo. Estás enamorada de la idea del amor, exigiendo siempre lo mejor de la vida.', traits: ['luxury', 'romantic', 'leader', 'aesthetic'], color: 'text-indigo-500', borderColor: 'border-indigo-300', img: 'img/ahri-kda.jpg' },
+                { id: 'darius-god', name: 'God King Darius', title: 'El Rey Conquistador', desc: 'Nacido para gobernar. Tienes un aura que impone respeto. Líder nato, apasionado y calculador.', traits: ['aura', 'leader', 'passionate', 'calculating'], color: 'text-yellow-600', borderColor: 'border-yellow-500', img: 'img/darius-god.jpg' },
+                { id: 'kapi', name: 'Kapi Manantial', title: 'El Guardián Zen', desc: 'Vives lento en un mundo rápido. Eres el refugio seguro para tus amigos, irradiando paz y naturaleza.', traits: ['chill', 'slow', 'caregiver', 'nature'], color: 'text-emerald-600', borderColor: 'border-emerald-400', img: 'img/kapi.jpg' },
+                { id: 'choncc-flower', name: 'Choncc Flor Fabulosa', title: 'La Señora del Chisme', desc: 'La reina del salseo. Disfrutas de la comodidad, un buen café y estar al tanto de todo. Energía de "tía divertida".', traits: ['gossip', 'coffee', 'chill', 'social'], color: 'text-pink-600', borderColor: 'border-pink-500', img: 'img/choncc-flower.jpg' },
+                { id: 'fenroar', name: 'Fenrugido', title: 'El Lobo Solitario', desc: 'Vives en estado de alerta, protegiendo tu territorio. Tu corazón busca incansablemente a esa compañera de vida con quien compartir tu lealtad eterna.', traits: ['loner', 'alert', 'romantic', 'loyal'], color: 'text-slate-600', borderColor: 'border-slate-400', img: 'img/fenroar.jpg' },
+                { id: 'knife-pup', name: 'Cuchibueso', title: 'El Romántico Resiliente', desc: 'Tienes muchísimo amor para dar. Aunque a veces te rompen el corazón, tu optimismo te hacen adorablemente persistente.', traits: ['attention', 'romantic', 'resilient', 'cute'], color: 'text-orange-600', borderColor: 'border-orange-400', img: 'img/knife-pup.jpg' },
+                { id: 'dowsie', name: 'Magagua Gominola', title: 'La Dulzura Tímida', desc: 'Dulzura pura. Eres tímida al principio, pero quien se gana tu confianza descubre un tesoro. Tu superpoder es tu ternura.', traits: ['shy', 'cute', 'adorable', 'friendly'], color: 'text-blue-500', borderColor: 'border-blue-300', img: 'img/dowsie.jpg' },
+                { id: 'duckbill', name: 'Ornitorrinco Meloso', title: 'El Hiperactivo Social', desc: 'Batería social inagotable. Te encanta la multitud y el contacto físico. Eres positividad en estado puro.', traits: ['crowd', 'positive', 'hyper', 'romantic'], color: 'text-yellow-500', borderColor: 'border-yellow-400', img: 'img/duckbill.jpg' },
+                { id: 'dango', name: 'Dango Gotalimón', title: 'El Optimista Estable', desc: 'Quieres comerte el mundo, pero disfrutas de los pequeños detalles. Tu meta es la estabilidad y la felicidad sencilla.', traits: ['optimist', 'ambitious', 'stable', 'friendly'], color: 'text-lime-600', borderColor: 'border-lime-400', img: 'img/dango.jpg' },
+                { id: 'burno', name: 'Burno', title: 'El Superviviente Práctico', desc: 'No te complicas la vida con dramas. Eres directo y autosuficiente. Aunque algunos te subestimen, tú siempre sales ganando.', traits: ['independent', 'simple', 'survivor', 'solo'], color: 'text-red-600', borderColor: 'border-red-500', img: 'img/burno.jpg' },
+                { id: 'ossia', name: 'Ossia', title: 'La Audaz', desc: 'Audacia sin límites. No conoces el miedo al fracaso. Eres atrevida y siempre terminas consiguiendo lo que quieres con estilo.', traits: ['bold', 'success', 'underestimated', 'brave'], color: 'text-cyan-600', borderColor: 'border-cyan-400', img: 'img/ossia.jpg' },
+                { id: 'pengu', name: 'Pengu', title: 'La Leyenda Viviente', desc: 'Eres el alma del juego. Puede que no parezcas intimidante, pero inspiras un respeto natural. Vives con pasión.', traits: ['iconic', 'gamer', 'respected', 'winner'], color: 'text-blue-700', borderColor: 'border-blue-500', img: 'img/pengu.jpg' }
+            ];
+
+
+        const questions = [
+            {
+                text: "Es viernes por la noche, ¿cuál es tu plan ideal?",
+                options: [
+                    { text: "Salir de fiesta y ser el centro de atención.", points: ['sexy', 'social', 'iconic', 'party', 'chaotic'] },
+                    { text: "Quedarme en casa rankeando/tryhardeando.", points: ['gamer', 'competitive', 'loner', 'strategic', 'intense'] },
+                    { text: "Una cena lujosa o un evento exclusivo.", points: ['luxury', 'aesthetic', 'fancy', 'leader'] },
+                    { text: "Pedir mucha comida y ver series en pijama.", points: ['glutton', 'chill', 'coffee', 'simple', 'adorable'] },
+                    { text: "Planear algo espontáneo y un poco peligroso.", points: ['chaotic', 'fun', 'rebellious', 'adventure'] },
+                ]
+            },
+            {
+                text: "En un grupo de amigos, tú eres...",
+                options: [
+                    { text: "El líder que toma las decisiones difíciles.", points: ['leader', 'aura', 'bold', 'resilient', 'powerful'] },
+                    { text: "El que hace reír a todos (a veces liándola).", points: ['happy', 'friendly', 'glutton', 'chaotic', 'fun'] },
+                    { text: "El que cuida que nadie salga herido.", points: ['caregiver', 'reliable', 'light', 'sensitive', 'justice'] },
+                    { text: "El que siempre desaparece o va a su bola.", points: ['independent', 'loner', 'dark', 'mysterious', 'rebellious'] },
+                ]
+            },
+            {
+                text: "¿Cuál es tu mayor defecto?",
+                options: [
+                    { text: "Soy demasiado perfeccionista, colapso si algo falla.", points: ['perfectionist', 'aesthetic', 'ambitious', 'resilient'] },
+                    { text: "Me enamoro demasiado rápido y sufro.", points: ['romantic', 'attention', 'passionate', 'sensitive'] },
+                    { text: "Soy muy testarudo/a, es mi idea o nada.", points: ['stubborn', 'rebellious', 'powerful', 'leader'] },
+                    { text: "Soy un poco manipulador/a para conseguir lo que quiero.", points: ['strategic', 'chaotic', 'calculating', 'smart'] },
+                ]
+            },
+            {
+                text: "Te encuentras una cartera con dinero, ¿qué haces?",
+                options: [
+                    { text: "Busco al dueño, es lo correcto.", points: ['stable', 'justice', 'light', 'noble', 'heroic'] },
+                    { text: "Me compro algo bonito para lucirlo.", points: ['aesthetic', 'luxury', 'cute', 'fancy'] },
+                    { text: "Invito a mis amigos a comer hasta reventar.", points: ['social', 'friendly', 'glutton', 'happy'] },
+                    { text: "Me compro Skins o RP inmediatamente.", points: ['gamer', 'fun', 'chaotic', 'intense'] },
+                ]
+            },
+            {
+                text: "¿Qué cualidad valoras más en ti mismo?",
+                options: [
+                    { text: "Mi inteligencia y rebeldía.", points: ['smart', 'strategic', 'brain', 'rebellious'] },
+                    { text: "Mi capacidad de luchar por causas justas.", points: ['loyal', 'warrior', 'caregiver', 'justice', 'light'] },
+                    { text: "Mi estilo único y mi resiliencia.", points: ['aesthetic', 'unique', 'resilient', 'bold'] },
+                    { text: "Mi ambición de ser el mejor.", points: ['worker', 'ambitious', 'competitive', 'powerful', 'aura'] },
+                ]
+            },
+            {
+                text: "Tu interés romántico no te hace caso...",
+                options: [
+                    { text: "Insisto caballerosamente hasta conquistarle.", points: ['resilient', 'attention', 'romantic', 'hyper', 'ambitious'] },
+                    { text: "Paso página, yo valgo mucho más.", points: ['leader', 'independent', 'bold', 'luxury'] },
+                    { text: "Me pongo sensible y trato de mejorar el mundo.", points: ['music', 'artistic', 'shy', 'light', 'sensitive'] },
+                    { text: "Hago una locura para llamar su atención.", points: ['strategic', 'chaotic', 'fun', 'rebellious'] },
+                ]
+            },
+            {
+                text: "Elige un ambiente:",
+                options: [
+                    { text: "Sombras, misterio, justicia nocturna.", points: ['dark', 'intense', 'justice', 'mysterious'] },
+                    { text: "Kawaii, cafetería, brillo pastel.", points: ['cute', 'aesthetic', 'happy', 'light'] },
+                    { text: "Tecnología, neón, futuro.", points: ['smart', 'gamer', 'rebellious', 'intense'] },
+                    { text: "Castillos, duelo de honor, realeza.", points: ['noble', 'powerful', 'ambitious', 'leader', 'aura'] },
+                    { text: "Cosmos, estrellas, templos antiguos.", points: ['mystic', 'magic', 'light', 'aura', 'star'] },
+                ]
+            },
+            {
+                text: "Cuando algo sale mal y fracasas, tú...",
+                options: [
+                    { text: "Analizo el error fríamente para no repetirlo.", points: ['smart', 'strategic', 'calculating', 'stable'] },
+                    { text: "Me enfado, rompo algo, pero vuelvo más fuerte.", points: ['intense', 'chaotic', 'warrior', 'fun'] },
+                    { text: "Busco consuelo en mis amigos o en comida rica.", points: ['social', 'glutton', 'sensitive', 'friendly'] },
+                    { text: "Me arreglo el cabello, sonrío y sigo adelante.", points: ['resilient', 'aesthetic', 'proud', 'leader'] },
+                ]
+            },
+            {
+                text: "Si pudieras tener un superpoder, ¿cuál elegirías?",
+                options: [
+                    { text: "Controlar el tiempo para arreglar injusticias.", points: ['justice', 'caregiver', 'sensitive', 'magic'] },
+                    { text: "Poder absoluto para aplastar a mis enemigos.", points: ['powerful', 'ambitious', 'competitive', 'dark', 'aura'] },
+                    { text: "Ser invisible para gastar bromas o huir.", points: ['playful', 'chaotic', 'shy', 'mysterious'] },
+                    { text: "Tener un encanto irresistible.", points: ['sexy', 'romantic', 'iconic', 'attention'] },
+                    { text: "Crear estrellas y moldear la realidad.", points: ['mystic', 'magic', 'light', 'star'] },
+                ]
+            },
+            {
+                text: "Tu filosofía de vida se resume en:",
+                options: [
+                    { text: "Trabaja duro en silencio, deja que el éxito haga ruido.", points: ['worker', 'humble', 'loner', 'survivor'] },
+                    { text: "La vida es corta, cómetela a bocados.", points: ['happy', 'party', 'fun', 'optimist'] },
+                    { text: "El estilo y la clase son lo primero.", points: ['aesthetic', 'luxury', 'fancy', 'unique'] },
+                    { text: "Ganar no es lo importante, es lo único.", points: ['winner', 'respected', 'bold', 'leader'] },
+                    { text: "Todo está conectado por un destino místico.", points: ['mystic', 'magic', 'aura', 'star'] },
+                ]
+            }
+        ];
+
+        const App = () => {
+            const [started, setStarted] = useState(false);
+            const [currentQuestion, setCurrentQuestion] = useState(0);
+            const [scores, setScores] = useState({});
+            const [result, setResult] = useState(null);
+
+            useEffect(() => {
+                if (window.lucide) window.lucide.createIcons();
+            });
+
+            const startQuiz = () => setStarted(true);
+
+            const handleAnswer = (points) => {
+                const newScores = { ...scores };
+                points.forEach(trait => {
+                    characters.forEach(char => {
+                        if (char.traits.includes(trait)) {
+                            newScores[char.id] = (newScores[char.id] || 0) + 1;
+                        }
+                    });
+                });
+                setScores(newScores);
+                if (currentQuestion < questions.length - 1) {
+                    setCurrentQuestion(currentQuestion + 1);
+                } else {
+                    calculateResult(newScores);
+                }
+            };
+
+            const calculateResult = (finalScores) => {
+                let winner = characters[0];
+                let maxScore = -1;
+                const shuffledChars = [...characters].sort(() => 0.5 - Math.random());
+                shuffledChars.forEach(char => {
+                    const score = finalScores[char.id] || 0;
+                    if (score > maxScore) {
+                        maxScore = score;
+                        winner = char;
+                    }
+                });
+                setResult(winner);
+            };
+
+            const restart = () => {
+                setStarted(false);
+                setCurrentQuestion(0);
+                setScores({});
+                setResult(null);
+            };
+
+            const shareOnX = () => {
+                const element = document.querySelector('#results-card');
+                const buttons = document.querySelector('#action-buttons');
+                if (buttons) buttons.style.display = 'none';
+                if (window.html2canvas) {
+                    window.html2canvas(element, {
+                        backgroundColor: null,
+                        scale: 2,
+                        useCORS: true,
+                        logging: false
+                    }).then(canvas => {
+                        if (buttons) buttons.style.display = 'flex';
+                        const link = document.createElement('a');
+                        link.download = `TFT-Minileyenda-${result.name.replace(/\s+/g, '-')}.png`;
+                        link.href = canvas.toDataURL();
+                        link.click();
+                        setTimeout(() => {
+                            const text = `¡Soy ${result.name} en el mundo de TFT! ✨\n\n"${result.title}"\nDescubre tu arquetipo de estratega aquí:\n\n(Adjunta la imagen descargada 📸)\n\n#TFT #TeamfightTactics #Quiz`;
+                            const url = window.location.href;
+                            const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+                            window.open(twitterUrl, '_blank');
+                        }, 1500);
+                    }).catch(err => {
+                        console.error("Error al capturar:", err);
+                        if (buttons) buttons.style.display = 'flex';
+                        alert("Hubo un problema al generar la imagen.");
+                    });
+                }
+            };
+
+            // --- PANTALLA INICIO ---
+            if (!started) {
+                return (
+                    <div className="min-h-screen flex flex-col items-center justify-center p-6 relative overflow-hidden">
+                        <div className="bg-noise"></div>
+                        <div className="aura-blob aura-purple"></div>
+                        <div className="aura-blob aura-lime"></div>
+
+                        <div className="glass-card max-w-lg w-full p-10 text-center relative z-10 mb-8">
+                            <div className="mb-6 flex justify-center">
+
+                                <div className="w-64 h-64 bg-white rounded-full flex items-center justify-center shadow-lg border-4 border-purple-100 overflow-hidden relative group rotate-3">
+
+                                    <div className="absolute inset-0 bg-gradient-to-tr from-purple-200/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                    <img src="img/tft-logo.jpg" alt="TFT Logo" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                                </div>
+                            </div>
+
+                            <h1 className="text-5xl md:text-6xl font-serif italic text-slate-900 mb-6 leading-tight">
+                                 ¿Qué Minileyenda <br />
+                                <span className="text-purple-600 not-italic font-bold tracking-tighter text-4xl md:text-5xl block mt-2">ERES?
+                                    </span>
+                            </h1>
+
+                            <p className="text-lg text-slate-600 mb-10 font-light leading-relaxed">
+                                Descubre qué estratega legendario resuena con tu personalidad. ¿Eres caos, orden o pura magia?
+                            </p>
+
+                            <button onClick={startQuiz} className="btn-pill group flex items-center justify-center gap-3 mx-auto w-full md:w-auto cursor-pointer">
+                                Iniciar Test <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                            </button>
+
+                            <div className="mt-8 pt-6 border-t border-purple-100 flex justify-center gap-6 text-purple-400">
+                                <Star size={16} /> <Sparkles size={16} /> <Zap size={16} />
+                            </div>
+                        </div>
+
+                        <footer className="text-center text-xs text-slate-400 font-light max-w-md leading-relaxed z-10">
+                            <p className="mb-2"><em>Disclaimer:</em> Esta aplicación es un proyecto de fans y no está afiliada, respaldada ni patrocinada por <strong className="text-purple-600 font-medium">Riot Games</strong>.</p>
+                            <p>Design & Code by Danae G. © 2025</p>
+                        </footer>
+                    </div>
+                );
+            }
+
+            // --- PANTALLA RESULTADO ---
+            if (result) {
+                return (
+                    <div className="min-h-screen flex items-center justify-center p-6 relative overflow-hidden">
+                        <div className="bg-noise"></div>
+                        <div className="aura-blob aura-pink"></div>
+                        <div className="aura-blob aura-purple"></div>
+
+                        <div id="results-card" className="max-w-md w-full overflow-hidden relative z-10 rounded-3xl shadow-2xl bg-white border border-slate-200">
+                            <div className="h-64 w-full relative flex items-center justify-center overflow-hidden bg-slate-50">
+                                <img src={result.img} className="absolute inset-0 w-full h-full object-cover opacity-30 blur-xl scale-110" />
+                                <div className="w-40 h-40 rounded-full border-4 border-white shadow-xl overflow-hidden relative z-10">
+                                    <img src={result.img} alt={result.name} className="w-full h-full object-cover" />
+                                </div>
+                                <div className="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-white/90 to-transparent z-0"></div>
+                            </div>
+
+                            <div className="relative -mt-6 flex justify-center z-20">
+                                <div className="bg-white p-2 rounded-full shadow-md border border-slate-100">
+                                    <div className="bg-purple-50 p-2 rounded-full">
+                                        <Crown size={20} className={result.color} />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="px-8 pb-10 pt-4 text-center bg-gradient-to-b from-white to-purple-50/20">
+                                <h1 className={`text-3xl font-serif font-bold mb-1 leading-tight text-center ${result.color}`}>
+                                    {result.name}
+                                </h1>
+                                <p className="text-slate-400 font-mono text-xs uppercase tracking-[0.2em] mb-6 text-center">
+                                    {result.title}
+                                </p>
+
+                                <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm mb-8">
+                                    <p className="text-slate-600 leading-relaxed font-light text-base italic">"{result.desc}"</p>
+                                </div>
+
+                                <div className="flex flex-wrap justify-center gap-2 mb-8">
+                                    {result.traits.map(trait => (
+                                        <span key={trait} className="px-4 py-1.5 bg-white border border-slate-200 rounded-full text-[10px] font-bold text-slate-500 uppercase tracking-wider shadow-sm">
+                                            {trait}
+                                        </span>
+                                    ))}
+                                </div>
+
+                                <div id="action-buttons" className="flex flex-col gap-3 mt-4 pt-6 border-t border-slate-200">
+                                    <button onClick={shareOnX} className="btn-pill w-full flex items-center justify-center gap-2 group shadow-lg shadow-purple-200 cursor-pointer">
+                                        Compartir en X <Share2 size={16} /> <span className="text-[10px] opacity-80 font-normal normal-case">(Descarga imagen)</span>
+                                    </button>
+                                    <button onClick={restart} className="btn-outline w-full justify-center border-slate-300 text-slate-500 hover:text-purple-600 cursor-pointer">
+                                        <RefreshCcw size={16} /> Volver a jugar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                );
+            }
+
+            // --- PANTALLA PREGUNTA ---
+            const question = questions[currentQuestion];
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+
+            return (
+                <div className="min-h-screen flex flex-col items-center justify-center p-6 relative overflow-hidden">
+                    <div className="bg-noise"></div>
+                    <div className="aura-blob aura-lime"></div>
+                    <div className="aura-blob aura-main"></div>
+
+                    <div className="max-w-xl w-full z-10">
+                        <div className="mb-8">
+                            <div className="flex justify-between items-end mb-4">
+                                <span className="text-sm font-bold text-purple-600 tracking-widest uppercase">Pregunta {currentQuestion + 1}</span>
+                                <span className="text-xs text-slate-400 font-mono">/ {questions.length}</span>
+                            </div>
+                            <div className="h-1.5 w-full progress-track rounded-full overflow-hidden">
+                                <div className="h-full progress-fill transition-all duration-500 ease-out" style={{ width: `${progress}%` }}></div>
+                            </div>
+                        </div>
+
+                        <div className="glass-card p-8 md:p-10 mb-6">
+                            <h2 className="text-2xl md:text-3xl font-serif text-slate-900 leading-snug">
+                                {question.text}
+                            </h2>
+                        </div>
+
+                        <div className="space-y-3">
+                            {question.options.map((option, idx) => (
+                                <button
+                                    key={idx}
+                                    onClick={() => handleAnswer(option.points)}
+                                    className="btn-option w-full group flex items-center justify-between cursor-pointer"
+                                >
+                                    <span className="text-slate-600 group-hover:text-purple-900 font-medium text-lg">
+                                        {option.text}
+                                    </span>
+                                    <div className="w-6 h-6 rounded-full border-2 border-slate-200 group-hover:border-purple-500 group-hover:bg-purple-50 transition-colors flex items-center justify-center">
+                                        <div className="w-2.5 h-2.5 rounded-full bg-purple-500 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                    </div>
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+
+</html>
