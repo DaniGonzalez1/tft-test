@@ -28,6 +28,6 @@ Utilidades: html2canvas (para la captura de pantalla)
 
 🚀 Cómo Ver el Proyecto
 
-Puedes ver la aplicación en funcionamiento aquí: 
+Puedes ver la aplicación en funcionamiento aquí: https://tfttest.netlify.app/
 
 Disclaimer: This is a fan-made project not endorsed by Riot Games and does not reflect the views or opinions of Riot Games or anyone officially involved in producing or managing Riot Games properties. Riot Games, and all associated properties are trademarks or registered trademarks of Riot Games, Inc.
