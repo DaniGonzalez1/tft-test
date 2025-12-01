@@ -202,15 +202,13 @@
 
         // --- DATOS COMPLETOS ---
         
-        // --- BASE DE DATOS BALANCEADA (TODOS TIENEN OPORTUNIDAD) ---
+        // --- BASE DE DATOS BALANCEADA ---
              const characters = [
-                    // --- NUEVOS AGREGADOS (ALTÍSIMA PRIORIDAD) ---
-                    { id: 'panda-choncc', name: 'Panda Choncc', title: 'El Sabio Glotón', desc: 'Eres adorablemente torpe y muy chistoso. Tu estrategia es rodar, comer bambú y ganar por accidente mientras te ves genial. A diferencia de otros, tú disfrutas la comida en paz.', traits: ['panda', 'funny', 'snack', 'clumsy', 'creature'], color: 'text-zinc-700', borderColor: 'border-zinc-500', img: 'img/pandachoncc.jpg' },
-                    { id: 'moquito-verde', name: 'Moquito Verde', title: 'El Soñador Perezoso', desc: 'El esfuerzo está sobrevalorado. Prefieres ganar haciendo lo mínimo indispensable. Eres adorable, pequeñito y experto en siestas estratégicas.', traits: ['lazy', 'sleep', 'goo', 'green', 'creature', 'rustic'], color: 'text-lime-500', borderColor: 'border-lime-400', img: 'img/moquitoverde.jpg' },
+                
+            
 
                     // --- RECIENTES ---
-                    { id: 'sona-chibi', name: 'Chibi Sona', title: 'La Virtuosa Melódica', desc: 'Eres una chica melódica, inteligente, hábil, tímida y amorosa. Prefieres crear armonía y apoyar a los tuyos antes que el conflicto directo.', traits: ['melody', 'shy', 'love', 'smart', 'support', 'fem', 'aesthetic'], color: 'text-cyan-500', borderColor: 'border-cyan-400', img: 'img/chibisona.jpg' },
-                    { id: 'shisa', name: 'Shisa', title: 'El Guardián Feroz', desc: 'Tienes rasgos mixtos de león, oveja y ratón. Pareces adorable, pero cuando obtienes más poder, tu cabello se vuelve más largo y salvaje.', traits: ['wild', 'anger', 'lion', 'power', 'hair', 'creature', 'rustic'], color: 'text-orange-500', borderColor: 'border-orange-400', img: 'img/shisa.jpg' },
+                    
 
                     // --- PRIORIDAD ALTA ---
                     { id: 'kapi', name: 'Kapi', title: 'El Chill Vibes', desc: 'Tú no te estresas. Pones música lofi, fuerzas la misma composición de siempre y disfrutas. Tu estilo es relajado y natural.', traits: ['chill', 'vibes', 'music', 'nature', 'rustic', 'creature'], color: 'text-emerald-500', borderColor: 'border-emerald-400', img: 'img/kapi.jpg' },
@@ -221,7 +219,7 @@
                     { id: 'teemo-devil', name: 'Teemonio', title: 'El Estratega Cruel', desc: 'Disfrutas el sufrimiento ajeno. Compras las fichas que otros quieren y usas emotes para desconcentrar.', traits: ['troll', 'evil', 'mindgame', 'toxic', 'creature'], color: 'text-red-800', borderColor: 'border-red-700', img: 'img/teemo-devil.jpg' },
                     { id: 'pengu', name: 'Pengu', title: 'El Clásico', desc: 'El equilibrio perfecto. Eres la mascota icónica que todos aman, respetuoso y heroico.', traits: ['classic', 'balanced', 'hero', 'respect', 'creature'], color: 'text-blue-600', borderColor: 'border-blue-500', img: 'img/pengu.jpg' },
                     { id: 'dango', name: 'Dango', title: 'La Mascota Feliz', desc: 'Ruedas por el tablero sin saber muy bien qué pasa, pero eres feliz. Eres adorable y redondito.', traits: ['happy', 'cute', 'luck', 'roll', 'creature'], color: 'text-lime-500', borderColor: 'border-lime-400', img: 'img/dango.jpg' },
-                    { id: 'kaisa-chibi', name: 'Chibi Kai\'Sa', title: 'La Superviviente', desc: 'Nunca te rindes. Sabes pivotar tu composición en segundos. Tienes un instinto agudo y adaptable.', traits: ['flex', 'survivor', 'adapt', 'instinct', 'fem'], color: 'text-fuchsia-700', borderColor: 'border-fuchsia-600', img: 'img/chibikaisa.jpg' },
+                    { id: 'kaisa-chibi', name: 'Chibi Kai\'Sa', title: 'La Superviviente', desc: 'Nunca te rindes. Sabes pivotar tu composición en segundos. Tienes un instinto agudo y adaptable.', traits: ['flex', 'survivor', 'adapt', 'instinct', 'fem'], color: 'text-fuchsia-700', borderColor: 'border-fuchsia-600', img: 'img/kaisa.jpg' },
                     { id: 'ezreal-chibi', name: 'Chibi Ezreal', title: 'El Explorador', desc: 'Te encantan los objetos y lucirte. Tienes un estilo muy cool y aventurero.', traits: ['items', 'explorer', 'showoff', 'adventure', 'masc', 'aesthetic'], color: 'text-amber-500', borderColor: 'border-amber-400', img: 'img/chibiezreal.jpg' },
                     { id: 'katarina-ba', name: 'Katarina Academia', title: 'La Asesina Competitiva', desc: 'Solo te importa ganar. Eres directa, letal y odias perder el tiempo. Tienes una personalidad fuerte y afilada.', traits: ['assassin', 'sharp', 'fast', 'competitive', 'fem'], color: 'text-red-700', borderColor: 'border-red-600', img: 'img/katarina-ba.jpg' },
                     { id: 'jinx-chibi', name: 'Chibi Jinx', title: 'El Desastre Andante', desc: '¡Explosiones! Si no hay caos, te aburres. Tu estilo de juego es impredecible y ruidoso.', traits: ['chaos', 'crazy', 'rockets', 'fun', 'fem'], color: 'text-fuchsia-600', borderColor: 'border-fuchsia-500', img: 'img/jinx.jpg' },
@@ -229,12 +227,19 @@
                     { id: 'ekko-chibi', name: 'Chibi Ekko', title: 'El Calculador', desc: 'Todo está en tu cabeza. Tienes un estilo urbano, moderno y tecnológico.', traits: ['smart', 'calc', 'tech', 'predict', 'masc', 'street'], color: 'text-teal-600', borderColor: 'border-teal-400', img: 'img/ekko.jpg' },
                     { id: 'molediver', name: 'Topobrero', title: 'El Trabajador Humilde', desc: 'Nadie te nota, pero siempre quedas Top 4. Trabajas en silencio, acumulas recursos y no te importa mancharte las manos.', traits: ['work', 'humble', 'dirt', 'steady', 'creature', 'rustic'], color: 'text-yellow-700', borderColor: 'border-yellow-600', img: 'img/molediver.jpg' },
                     { id: 'knife-pup', name: 'Cuchibueso', title: 'El Cachorro Letal', desc: 'Demasiado adorable para ser tan peligroso. Eres juguetón pero con un lado afilado.', traits: ['cute', 'dog', 'deadly', 'playful', 'creature'], color: 'text-rose-500', borderColor: 'border-rose-400', img: 'img/knifepup.jpg' },
+                    { id: 'ravenlord', name: 'Ravenlord', title: 'El Señor Oscuro', desc: 'Un enigma oscuro. Eres calculador, serio y prefieres las sombras.', traits: ['meta', 'dark', 'win', 'ruthless', 'masc'], color: 'text-violet-800', borderColor: 'border-violet-700', img: 'img/ravenlord.jpg' },
+                     { id: 'seraphine', name: 'Seraphine', title: 'La Cantante Conectora', desc: 'Eres una estrella pop de Piltóver y Zaun. Escuchas las almas de las personas y usas tu música para conectar ambos mundos, buscando siempre la armonía y la empatía.', traits: ['melody', 'star', 'diva', 'love', 'connect', 'fem', 'aesthetic'], color: 'text-pink-500', borderColor: 'border-pink-400', img: 'img/seraphine.jpg' },
+                    { id: 'aliplata', name: 'Aliplata', title: 'El Explorador Leal', desc: 'Basado en las rapaces demacianas, eres una montura noble y veloz. Valoras la lealtad, el deber y la libertad de los cielos abiertos.', traits: ['wild', 'loyal', 'guard', 'explorer', 'fast', 'creature', 'rustic'], color: 'text-sky-600', borderColor: 'border-sky-500', img: 'img/aliplata.jpg' },
+                    { id: 'panda-choncc', name: 'Panda Choncc', title: 'El Sabio Glotón', desc: 'Eres adorablemente torpe y muy chistoso. Tu estrategia es rodar, comer bambú y ganar por accidente mientras te ves genial. A diferencia de otros, tú disfrutas la comida en paz.', traits: ['panda', 'funny', 'snack', 'clumsy', 'creature'], color: 'text-zinc-700', borderColor: 'border-zinc-500', img: 'img/pandachoncc.jpg' },
+                    { id: 'moquito-verde', name: 'Moquito Verde', title: 'El Soñador Perezoso', desc: 'El esfuerzo está sobrevalorado. Prefieres ganar haciendo lo mínimo indispensable. Eres adorable, pequeñito y experto en siestas estratégicas.', traits: ['lazy', 'sleep', 'goo', 'green', 'creature', 'rustic'], color: 'text-lime-500', borderColor: 'border-lime-400', img: 'img/moquitoverde.jpg' },
+                    { id: 'sona-chibi', name: 'Chibi Sona', title: 'La Virtuosa Melódica', desc: 'Eres una chica melódica, inteligente, hábil, tímida y amorosa. Prefieres crear armonía y apoyar a los tuyos antes que el conflicto directo.', traits: ['melody', 'shy', 'love', 'smart', 'support', 'fem', 'aesthetic'], color: 'text-cyan-500', borderColor: 'border-cyan-400', img: 'img/chibisona.jpg' },
+                    { id: 'shisa', name: 'Shisa', title: 'El Guardián Feroz', desc: 'Tienes rasgos mixtos de león, oveja y ratón. Pareces adorable, pero cuando obtienes más poder, tu cabello se vuelve más largo y salvaje.', traits: ['wild', 'anger', 'lion', 'power', 'hair', 'creature', 'rustic'], color: 'text-orange-500', borderColor: 'border-orange-400', img: 'img/shisa.jpg' },
+                    { id: 'poro-snow', name: 'Poro Nevado', title: 'El Inocente', desc: 'Tienes el corazón más puro del universo y siempre apoyas a otros.', traits: ['innocent', 'support', 'cute', 'creature'], color: 'text-sky-400', borderColor: 'border-sky-300', img: 'img/poro-snow.jpg' },
 
                     // --- OTROS POPULARES ---
                     { id: 'annie-chibi', name: 'Chibi Annie', title: 'La Hija del Fuego', desc: '¡Lo quieres todo y lo quieres YA! Eres temperamental, pasional y un poco aterradora.', traits: ['aggro', 'fire', 'scary', 'impulsive', 'fem'], color: 'text-orange-600', borderColor: 'border-orange-500', img: 'img/chibiannie.jpg' },
                     { id: 'yasuo-chibi', name: 'Chibi Yasuo', title: 'El Duelista Mecánico', desc: 'Mueves tus unidades cada segundo. Eres un guerrero solitario enfocado en la perfección.', traits: ['micro', 'skill', 'loner', 'sword', 'masc'], color: 'text-sky-700', borderColor: 'border-sky-600', img: 'img/chibiyasuo.jpg' },
                     { id: 'mf-bb', name: 'Chibi Miss Fortune', title: 'La Magnate', desc: 'El oro lo es todo. Te gusta el lujo, el riesgo y tienes una presencia imponente.', traits: ['money', 'risk', 'rich', 'bounty', 'fem', 'aesthetic'], color: 'text-red-500', borderColor: 'border-red-400', img: 'img/mf-bb.jpg' },
-                    { id: 'ravenlord', name: 'Ravenlord', title: 'El Señor Oscuro', desc: 'Un enigma oscuro. Eres calculador, serio y prefieres las sombras.', traits: ['meta', 'dark', 'win', 'ruthless', 'masc'], color: 'text-violet-800', borderColor: 'border-violet-700', img: 'img/ravenlord.jpg' },
                     { id: 'fenroar', name: 'Fenrugido', title: 'El Guardián Leal', desc: 'Protector silencioso. Te sientes cómodo en la naturaleza y protegiendo a tu manada.', traits: ['guard', 'tank', 'loyal', 'wild', 'creature', 'rustic'], color: 'text-slate-600', borderColor: 'border-slate-400', img: 'img/fenroar.jpg' },
                     { id: 'burno', name: 'Burno', title: 'El Tilteado', desc: 'Tu relación con el juego es amor-odio. Eres pura pasión y mecha corta.', traits: ['rage', 'fire', 'tilt', 'stubborn', 'masc'], color: 'text-red-600', borderColor: 'border-red-500', img: 'img/burno.jpg' },
                     { id: 'aoshin-sun', name: 'Ao Shin', title: 'El Dragón de Late Game', desc: 'Paciencia y poder ancestral. Eres una entidad poderosa por encima del bien y el mal.', traits: ['late', 'dragon', 'patience', 'powerful', 'creature'], color: 'text-amber-600', borderColor: 'border-amber-500', img: 'img/aoshin.jpg' }
@@ -245,10 +250,10 @@
                     {
                         text: "¿Cuál es tu filosofía al empezar la partida?",
                         options: [
-                            { text: "Agresividad pura. Dominar desde el inicio.", points: ['aggro', 'power', 'darius-god', 'annie-chibi'] },
+                            { text: "Agresividad pura. Dominar desde el inicio.", points: ['aggro', 'power', 'darius-god', 'annie-chibi', 'katarina-ba', 'fenroar', 'mf-bb'] },
                             { text: "Paciencia. Perder vida para ganar oro.", points: ['money', 'risk', 'mf-bb', 'teemo-devil'] },
-                            { text: "Adaptabilidad. Fluir con lo que el juego me da.", points: ['flex', 'survivor', 'kaisa-chibi', 'pengu'] },
-                            { text: "Ganar por accidente mientras como algo rico.", points: ['panda', 'funny', 'panda-choncc', 'snack'] }, // Panda
+                            { text: "Adaptabilidad. Fluir con lo que el juego me da.", points: ['flex', 'survivor', 'kaisa-chibi', 'pengu', 'poro-snow'] },
+                            { text: "Ganar por accidente mientras como algo rico.", points: ['panda', 'funny', 'panda-choncc', 'snack', 'kapi'] }, // Panda
                             { text: "Relajación. Hacer lo mínimo indispensable y ganar.", points: ['lazy', 'sleep', 'moquito-verde', 'kapi'] } // Moquito
                         ]
                     },
@@ -257,25 +262,25 @@
                         options: [
                             { text: "Analizo qué pude hacer mejor (Skill).", points: ['micro', 'skill', 'ekko-chibi', 'yasuo-chibi'] },
                             { text: "Me enfado y mi furia crece como una bestia.", points: ['wild', 'anger', 'shisa', 'burno'] },
-                            { text: "Me da igual, aprovecho para echarme una siesta.", points: ['lazy', 'sleep', 'moquito-verde', 'dango'] }, // Moquito
+                            { text: "Me da igual, aprovecho para echarme una siesta.", points: ['lazy', 'sleep', 'moquito-verde', 'dango', 'kapi', 'poro-snow'] }, // Moquito
                             { text: "Me río de mi propia torpeza.", points: ['funny', 'clumsy', 'panda-choncc', 'duckbill'] }, // Panda
-                            { text: "No importa, mis objetos son perfectos.", points: ['items', 'showoff', 'ezreal-chibi', 'qiqi'] }
+                            { text: "No importa, mis objetos son perfectos.", points: ['items', 'showoff', 'ezreal-chibi', 'qiqi', 'mf-bb'] }
                         ]
                     },
                     {
                         text: "Hablemos de ti: ¿Qué energía proyectas en el mundo real?",
                         options: [
-                            { text: "Energía Femenina / Diva (Me gusta brillar y destacar).", points: ['fem', 'diva', 'ahri-sg', 'lux-sg', 'qiqi', 'mf-bb'] },
+                            { text: "Energía Femenina / Diva (Me gusta brillar y destacar).", points: ['fem', 'diva', 'ahri-sg', 'lux-sg', 'seraphine', 'mf-bb'] },
                             { text: "Energía Masculina / Guerrero (Soy fuerte y directo).", points: ['masc', 'warrior', 'darius-god', 'yasuo-chibi', 'ezreal-chibi', 'burno'] },
                             { text: "Energía Perezosa / Chill (Solo quiero descansar).", points: ['lazy', 'sleep', 'moquito-verde', 'kapi'] }, // Moquito
-                            { text: "Energía Caótica o Graciosa (Hago reír a todos).", points: ['funny', 'panda', 'panda-choncc', 'duckbill'] } // Panda
+                            { text: "Energía Caótica o Graciosa (Hago reír a todos).", points: ['funny', 'panda', 'panda-choncc', 'duckbill'] }// Panda
                         ]
                     },
                     {
                         text: "¿Qué tipo de composiciones prefieres?",
                         options: [
-                            { text: "Verticales clásicas. Orden y honor.", points: ['classic', 'hero', 'pengu', 'lux-sg'] },
-                            { text: "Reroll caótico. Buscar fichas doradas.", points: ['reroll', 'hyper', 'duckbill', 'knife-pup'] },
+                            { text: "Verticales clásicas. Orden y honor.", points: ['classic', 'hero', 'pengu', 'lux-sg', 'ahri-kda'] },
+                            { text: "Reroll caótico. Buscar fichas doradas.", points: ['reroll', 'hyper', 'duckbill', 'knife-pup', 'annie-chibi'] },
                             { text: "Algo creativo e innovador que inventé yo.", points: ['create', 'unique', 'qiqi', 'sona-chibi'] },
                             { text: "Tanques inmortales que protejan al equipo.", points: ['tank', 'guard', 'molediver', 'fenroar'] },
                             { text: "Legendarias poderosas que aplasten a todos.", points: ['king', 'power', 'darius-god', 'aoshin-sun'] }
@@ -287,7 +292,7 @@
                             { text: "Elegante, visual y detallista (Aesthetic/Cute).", points: ['aesthetic', 'star', 'ahri-sg', 'lux-sg', 'ezreal-chibi', 'gwen-cafe'] },
                             { text: "Rústico, natural y cómodo (Nature/Wild).", points: ['rustic', 'nature', 'kapi', 'molediver', 'shisa', 'fenroar'] },
                             { text: "Relajado, pijama y pantuflas (Comfy/Lazy).", points: ['lazy', 'panda', 'moquito-verde', 'panda-choncc'] }, // Ambos nuevos
-                            { text: "Urbano, tecnológico y moderno (Street/Tech).", points: ['tech', 'street', 'ekko-chibi', 'qiqi', 'jinx-chibi'] }
+                            { text: "Urbano, tecnológico y moderno (Street/Tech).", points: ['tech', 'street', 'ekko-chibi', 'qiqi', 'jinx-chibi', 'ahri-kda'] }
                         ]
                     },
                     {
@@ -297,7 +302,7 @@
                             { text: "Busco una alternativa rápidamente.", points: ['adapt', 'instinct', 'kaisa-chibi', 'ekko-chibi'] },
                             { text: "Grito y hago un escándalo.", points: ['chaos', 'crazy', 'jinx-chibi', 'duckbill'] },
                             { text: "Me da igual, yo iba a buscar comida.", points: ['snack', 'panda', 'panda-choncc', 'dango'] }, // Panda
-                            { text: "Miro si hay algo más brillante o bonito.", points: ['visuals', 'charm', 'ahri-sg', 'ezreal-chibi'] }
+                            { text: "Miro si hay algo más brillante o bonito.", points: ['visuals', 'charm', 'ahri-sg', 'ezreal-chibi', 'ahri-kda'] }
                         ]
                     },
                     {
@@ -373,7 +378,7 @@
                     {
                         text: "Última: ¿Por qué ganas?",
                         options: [
-                            { text: "Inteligencia superior.", points: ['smart', 'calc', 'ekko-chibi', 'ravenlord'] },
+                            { text: "Inteligencia superior.", points: ['smart', 'calc', 'ekko-chibi', 'ravenlord', 'kapi'] },
                             { text: "Estilo y carisma.", points: ['visuals', 'showoff', 'ahri-sg', 'ezreal-chibi'] },
                             { text: "Supervivencia e instinto.", points: ['survivor', 'adapt', 'kaisa-chibi', 'molediver'] },
                             { text: "Locura y explosiones.", points: ['crazy', 'rockets', 'jinx-chibi', 'annie-chibi'] },
@@ -449,7 +454,8 @@
                         link.href = canvas.toDataURL();
                         link.click();
                         setTimeout(() => {
-                            const text = `¡Soy ${result.name} en el mundo de TFT! ✨\n\n"${result.title}"\nDescubre tu arquetipo de estratega aquí:\n\n(Adjunta la imagen descargada 📸)\n\n#TFT #TeamfightTactics #Quiz`;
+                            const text = `¡Soy ${result.name} en el mundo de TFT! ✨\n\n"${result.title}"\nDescubre tu arquetipo de estratega aquí:\n\n
+                            #TFT #TeamfightTactics #Quiz`;
                             const url = window.location.href;
                             const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
                             window.open(twitterUrl, '_blank');
